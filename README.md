@@ -1,6 +1,14 @@
 # ZSH Customization Theme
 Custom Theme based on oh-my-zsh shell
 
+### Installation
+
+Simply clone this into a folder and edit the `~/.zshrc` file and add/edit the property
+
+```
+ZSH_CUSTOM=path/to/cloned/repo
+```
+
 ### Features
 Mac OS:
 
