@@ -1,7 +1,7 @@
-### ZSH Customization Theme
+# ZSH Customization Theme
 Custom Theme based on oh-my-zsh shell
 
-# Features
+### Features
 Mac OS:
 1. Battery Percent
 2. RAM Usage
