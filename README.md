@@ -1,5 +1,5 @@
 # ZSH Customization Theme
-Custom Theme based on oh-my-zsh shell
+Custom Theme(uses robbyrussell theme)  based on oh-my-zsh shell
 
 ### Installation
 
@@ -10,6 +10,10 @@ ZSH_CUSTOM=path/to/cloned/repo
 ```
 
 ### Features
+This is a wrapper over Robby Russell's ZSH Theme adding a few features that I
+use daily.
+
+##### OS Specific
 Mac OS:
 
 1. Battery Percent
