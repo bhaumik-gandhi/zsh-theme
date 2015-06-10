@@ -7,6 +7,12 @@ Simply clone this into a folder and edit the `~/.zshrc` file and add/edit the pr
 
 ```
 ZSH_CUSTOM=path/to/cloned/repo
+
+
+set the theme to (Depending on OS):
+txn-osx
+txn-lin
+txn-win
 ```
 
 ### Features
@@ -21,7 +27,7 @@ Mac OS:
 1. Timestamp
 
 -----------------------
-Linux:
+Linux & Windows:
 
 1. RAM Usage
 2. CPU Load
