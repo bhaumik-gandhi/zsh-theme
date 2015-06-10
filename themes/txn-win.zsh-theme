@@ -1,36 +1,36 @@
 function prompt_char {
-    git branch >/dev/null 2>/dev/null && echo '±' && return
-        hg root >/dev/null 2>/dev/null && echo '☿' && return
-        echo '%(!.!.➜)'
+	git branch >/dev/null 2>/dev/null && echo '±' && return
+		hg root >/dev/null 2>/dev/null && echo '☿' && return
+		echo '%(!.!.➜)'
 }
 
 
 function parse_hg_dirty {
-    if [[ -n $(hg status -mard . 2> /dev/null) ]]; then
-        echo "$ZSH_THEME_HG_PROMPT_DIRTY"
-            fi
+	if [[ -n $(hg status -mard . 2> /dev/null) ]]; then
+		echo "$ZSH_THEME_HG_PROMPT_DIRTY"
+			fi
 }
 
 function get_RAM {
-    free -m | awk '{if (NR==3) print $4}' | xargs -i echo 'scale=1;{}/1000' | bc
+	free -m | awk '{if (NR==3) print $3}' | xargs -i echo 'scale=1;{}/1000' | bc
 }
 
 function get_nr_jobs() {
-    jobs | wc -l
+	jobs | wc -l
 }
 
 function get_nr_CPUs() {
-    grep -c "^processor" /proc/cpuinfo
+	grep -c "^processor" /proc/cpuinfo
 }
 
 function get_load() {
-    uptime | awk '{print $11}' | tr ',' ' '
+	top -bn1 | grep "Cpu(s)" | sed "s/.*, *\([0-9.]*\)%* id.*/\1/" | awk '{print 100 - $1"%"}'   
 }
 
 
 local ret_status="%{$fg_bold[blue]%}[%*] %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ %s)"
 PROMPT='${ret_status}%{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
-RPROMPT='%{$fg_bold[red]%}[$(get_RAM)G, $(get_load)] %{$reset_color%}'
+RPROMPT='%{$fg_bold[red]%}[RAM: $(get_RAM)GB] %{$reset_color%}'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="git:(%{$fg[red]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
