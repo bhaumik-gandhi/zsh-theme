@@ -7,11 +7,18 @@ function get_total_RAM {
 }
 
 function get_server_name {
+    ips="$(hostname -I)"
+    ipArray=($ips)
     if [ -z "$ZSH_SERVER_NAME" ]
     then
-        echo ""
+        if [ -z "$ZSH_SERVER_NAME" ]
+        then
+            echo ""
+        else
+            echo "[$ZSH_SERVER_NAME]";
+        fi
     else
-        echo "[$ZSH_SERVER_NAME]";
+        echo "[${ipArray[0]}]";
     fi
 }
 
