@@ -1,16 +1,3 @@
-function prompt_char {
-    git branch >/dev/null 2>/dev/null && echo '±' && return
-        hg root >/dev/null 2>/dev/null && echo '☿' && return
-        echo '%(!.!.➜)'
-}
-
-
-function parse_hg_dirty {
-    if [[ -n $(hg status -mard . 2> /dev/null) ]]; then
-        echo "$ZSH_THEME_HG_PROMPT_DIRTY"
-            fi
-}
-
 function get_RAM {
 	free -m | awk '{if (NR==2) print $3}' | xargs -i echo 'scale=1;{}/1000' | bc
 }
@@ -19,20 +6,17 @@ function get_total_RAM {
 	free -m | awk '{if (NR==2) print $2}' | xargs -i echo 'scale=1;{}/1000' | bc
 }
 
-function get_nr_jobs() {
-    jobs | wc -l
-}
-
-function get_nr_CPUs() {
-    grep -c "^processor" /proc/cpuinfo
-}
-
-function get_load() {
-    uptime | awk '{print $11}' | tr ',' ' '
+function get_server_name {
+    if [ -z "$ZSH_SERVER_NAME" ]
+    then
+        echo ""
+    else
+        echo "[$ZSH_SERVER_NAME]";
+    fi
 }
 
 
-local ret_status="%{$fg_bold[blue]%}[%*] %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ %s)"
+local ret_status="%{$fg_bold[blue]%}$(get_server_name)[%*] %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ %s)"
 PROMPT='${ret_status}%{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 RPROMPT='%{$fg_bold[red]%}[RAM: $(get_RAM)GB / $(get_total_RAM)GB] %{$reset_color%}'
 
