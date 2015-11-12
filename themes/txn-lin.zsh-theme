@@ -23,7 +23,12 @@ function get_server_name {
             echo "[$ZSH_SERVER_NAME]";
         fi
     else
-        echo "[$hostNameIp]";
+        if [ -z "$ZSH_SERVER_NAME" ]
+        then
+            echo "[$hostNameIp]";
+        else
+            echo "[$hostNameIp ($ZSH_SERVER_NAME)]";
+        fi
     fi
 }
 
